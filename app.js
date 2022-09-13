@@ -16,4 +16,6 @@ app.use(express.json())
 // router
 app.use('/api/v1/tasks',tasks)
 
+// for other routes rather than the original one
+app.all('*',(req, res) =>res.send('you are on wrong way boy'))
 app.listen(port,console.log(` server is running on port no ${port}`))
