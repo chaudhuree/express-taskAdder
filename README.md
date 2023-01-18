@@ -28,3 +28,27 @@ run on terminal:
     useFindAndModify: false,
     useUnifiedTopology: true,
 ```
+
+<b>how to get the value from checkbox in react: </b>
+
+```
+import React, { useState } from "react";
+
+function MyComponent() {
+  const [checkboxValue, setCheckboxValue] = useState(false);
+
+  const handleCheckboxChange = event => {
+    setCheckboxValue(event.target.checked);
+  };
+
+  return (
+    <div>
+      <input type="checkbox" onChange={handleCheckboxChange} />
+      <p>Checkbox Value: {checkboxValue.toString()}</p>
+    </div>
+  );
+}
+
+export default MyComponent;
+
+```
