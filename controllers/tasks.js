@@ -54,6 +54,7 @@ const updateTask = asyncWrapper(async (req, res, next) => {
   const task = await Task.findOneAndUpdate({ _id: taskID }, req.body, {
     new: true,
     runValidators: true,
+    // overwrite: true
   })
 
   if (!task) {
