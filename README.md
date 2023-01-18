@@ -19,3 +19,12 @@ run on terminal:
 ```
   overwrite: true
 ```
+
+<h2><b>code for db to clear console depricated messages</b></h2>
+
+```
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+    useUnifiedTopology: true,
+```
