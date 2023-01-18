@@ -2,12 +2,34 @@ const Task=require('../models/Task');
 const asyncWrapper=require('../middleware/async');
 const { createCustomError } = require('../errors/custom-error')
 
-// create a task
+//docs: create a task
 const createTask = asyncWrapper(async (req, res) => {
   const task = await Task.create(req.body)
   res.status(201).json({ task })
 })
 
+//docs: get single tasks by id
+//next is also passed to throw any kind of error 
+const getTask = asyncWrapper(async (req, res, next) => {
+
+  //note: rename id to taskID 
+
+  const { id: taskID } = req.params
+  const task = await Task.findOne({ _id: taskID })
+  if (!task) {
+
+    //docs: 
+    //next() is used to send custom error 
+    //createCustomError is a custom function to create custom error where message and status code is passed
+
+    //imp: return is used to stop the execution of the function 
+    //if we donot use return then we have to throw error by res.code manner
+    // res.status(404).json({ message: `No task with id : ${taskID}` })
+    return next(createCustomError(`No task with id : ${taskID}`, 404))
+  }
+
+  res.status(200).json({ task })
+})
 
 
 module.exports={getAllTasks,createTask,deleteTask,getTask,updateTask,deleteTask}
