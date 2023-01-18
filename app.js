@@ -1,4 +1,5 @@
 const express = require('express')
+const notFound= require('./middleware/not-found')
 // router
 const tasks = require('./routes/tasks')
 
@@ -22,8 +23,7 @@ app.use(express.json())
 app.use('/api/v1/tasks', tasks)
 
 // for other routes rather than the original one
-app.all('*', (req, res) => res.send('you are on wrong way boy'))
-
+app.use(notFound)
 
 const start = async () => {
   try {
