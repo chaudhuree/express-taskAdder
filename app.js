@@ -1,4 +1,3 @@
-
 const express = require('express')
 // router
 const tasks = require('./routes/tasks')
@@ -27,9 +26,15 @@ app.all('*', (req, res) => res.send('you are on wrong way boy'))
 
 
 const start = async () => {
-  await connectDB()
-app.listen(port, console.log(` server is running on port no ${port}`))
-}
+  try {
+    await connectDB(process.env.MONGO_URI);
+    app.listen(port, () =>
+      console.log(`Server is listening on port ${port}...`)
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // call  start function
 start()
