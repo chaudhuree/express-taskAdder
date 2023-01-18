@@ -11,7 +11,8 @@ const app = express()
 // database
 const connectDB = require('./db/connect')
 
-// app dependencies
+// middleware
+app.use(express.static('./public'));
 app.use(express.json())
 
 // app.get('/api/v1/tasks')          -get all the tasks
